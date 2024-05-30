@@ -1,10 +1,11 @@
 <script>
 	export let movies;
+	export let movieId;
 </script>
 
-<div class="flex flex-wrap justify-between space-x-1 w-full">
-	{#each movies as movie}
-		<div class="w-1/6 mb-12">
+{#each movies as movie}
+	<div class="w-1/6 mb-12">
+		{#if movie.id === movieId}
 			<a href={'/movies/' + movie.id}>
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -14,6 +15,6 @@
 				<h1 class="text-xl font-medium">{movie.original_title}</h1>
 				<p>{movie.release_date}</p>
 			</a>
-		</div>
-	{/each}
-</div>
+		{/if}
+	</div>
+{/each}

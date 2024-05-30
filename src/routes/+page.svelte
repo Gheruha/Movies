@@ -1,14 +1,21 @@
 <script>
-	import Ball from '$lib/images/ball.png';
+	import heroSection from '$lib/images/heroSection.mov';
 </script>
 
-<div class="flex space-x-10">
-	<img src={Ball} alt="" width="700" />
-	<div class=" pt-60">
-		<h1 class=" text-6xl font-bold">Best movies in one place.</h1>
-		<br />
-		<a href="/movies" class="font-mono p-4 rounded-md bg-slate-200 hover:bg-slate-100"
-			>Get Started</a
-		>
-	</div>
-</div>
+<section class="h-[100vh] w-full shrink-0 flex flex-col items-center justify-center relative">
+	<video
+		class="absolute w-full h-full object-cover -z-10"
+		muted
+		autoplay
+		loop
+		playsinline
+		disablepictureinpicture
+	>
+		<source src={heroSection} />
+	</video>
+	<h1 class=" text-6xl font-medium text-white">Best movies in one place.</h1>
+	<br />
+	<a href="/movies" class="text-white font-sans p-4 rounded-md bg-zinc-800 hover:bg-zinc-700"
+		>Get Started</a
+	>
+</section>

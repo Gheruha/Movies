@@ -6,6 +6,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
 	</head>
+
+	<!-- Check & apply theme here to avoid that flash -->
+	<script>
+		localStorage.theme === 'dark' ||
+		(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			? document.documentElement.classList.add('dark')
+			: document.documentElement.classList.remove('dark');
+	</script>
+
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>

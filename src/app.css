@@ -16,3 +16,51 @@ p {
 h1 {
 	@apply font-thin;
 }
+
+.movie-card {
+	width: 16.666667%
+}
+
+.movies-div {
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+.details-img-div {
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+.overflow-p {
+	padding-left: 160px;
+	padding-right: 160px
+}
+
+.nav{
+	padding-left: 80px;
+}
+
+@media (max-width : 1000px) {
+	.movie-card {
+		width: 40%;
+	}
+
+	.movies-div {
+		padding-left: 10px;
+		padding-right: 10px
+	}
+
+	.details-img-div {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.overflow-p {
+		padding-left: 0px;
+		padding-right: 0px
+	}
+
+	.nav{
+		padding-left: 20px;
+	}
+}

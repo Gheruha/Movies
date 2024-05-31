@@ -2,6 +2,7 @@
 	import heroSection from '$lib/images/heroSection.mov';
 </script>
 
+<!-- Hero Section -->
 <section class="h-[100vh] w-full shrink-0 flex flex-col items-center justify-center relative">
 	<video
 		class="absolute w-full h-full object-cover -z-10"
@@ -19,3 +20,4 @@
 		>Get Started</a
 	>
 </section>
+<!-- Hero Section -->

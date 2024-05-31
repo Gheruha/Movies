@@ -3,11 +3,13 @@
 	export let data;
 </script>
 
+<!-- Navigation -->
 <div class="pt-8 nav flex">
 	<a href="/"><span class="material-symbols-outlined"> arrow_back_ios </span></a>
 	<h1 class="">Popular Movies</h1>
 </div>
 
+<!-- Movies Cards Div -->
 <div class="w-full h-full text-center pt-12 movies-div">
 	<div class="flex justify-between pt-44">
 		<MovieCard movies={data.data} />

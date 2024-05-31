@@ -1,5 +1,6 @@
 <script>
 	import { fly } from 'svelte/transition';
+	import { back_url } from '$lib/store.js';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
 	export let video;
@@ -11,9 +12,11 @@
 <svelte:window bind:scrollY={scroll} />
 
 <!-- Navigation -->
-<div class="pt-8 nav flex absolute">
-	<a href="/movies" class="z-50"><span class="material-symbols-outlined"> arrow_back_ios </span></a>
-	<h1 class="">Movie Details</h1>
+<div class="pt-8 nav flex pl-6 absolute">
+	<a href={$back_url} class="z-50 text-white"
+		><span class="material-symbols-outlined"> arrow_back_ios </span></a
+	>
+	<h1>Movie Details</h1>
 </div>
 
 <!-- Hero section -->
@@ -35,6 +38,7 @@
 </section>
 <!-- Hero section -->
 
+<!-- Video Player-->
 <div class="about-movie" style:transform={`translate3d(0, ${scroll * -0.5}px , 0)`}>
 	<VideoPlayer videos={data.video} />
 </div>

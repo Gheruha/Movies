@@ -1,5 +1,6 @@
 <script>
 	export let videos;
+	console.log(videos);
 	let video_num = 0;
 	let video_res_size = videos.results.length;
 </script>

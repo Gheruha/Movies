@@ -41,8 +41,10 @@ h1 {
 	padding-right: 160px;
 }
 
-.nav {
-	padding-left: 80px;
+.page-name{
+	padding-left: 24px;
+	padding-top: 32px;
+	@apply text-2xl
 }
 
 .iframe-video {
@@ -75,14 +77,18 @@ h1 {
 		padding-right: 20px;
 	}
 
-	.nav {
-		padding-left: 20px;
-	}
-
 	.iframe-video {
 		width: 560px;
 		height: 340px;
 	}
+}
+
+.menu_links {
+	@apply text-zinc-400 hover:text-white hover:scale-110 transition-all duration-300 
+}
+.transparent-div {
+	background-color: rgba(0, 0, 0, 0.8);
+	@apply flex fixed w-full h-full justify-center items-center text-2xl z-50;
 }
 
 @media (max-width: 800px) {

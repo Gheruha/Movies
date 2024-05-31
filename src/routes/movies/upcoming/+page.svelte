@@ -1,12 +1,14 @@
 <script>
+	import { back_url } from '$lib/store.js';
 	import MovieCard from '$lib/movieCard.svelte';
+
+	back_url.set('/movies/upcoming');
 	export let data;
 </script>
 
 <!-- Navigation -->
-<div class="pt-8 nav flex">
-	<a href="/"><span class="material-symbols-outlined"> arrow_back_ios </span></a>
-	<h1 class="">Popular Movies</h1>
+<div class="page-name">
+	<h1 class="">Upcoming Movies</h1>
 </div>
 
 <!-- Movies Cards Div -->

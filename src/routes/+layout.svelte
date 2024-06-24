@@ -1,10 +1,15 @@
 <script>
+	// imports
 	import '../app.css';
 	import { fly } from 'svelte/transition';
-	import Theme from '$lib/theme.svelte';
-	export let data;
+	import { back_url } from '$lib/store';
+	import Search from '$lib/search.svelte';
 
+	// local data
+	export let data;
+	let show_search_input = false;
 	let show_menu = false;
+	let search_input = '';
 </script>
 
 <!-- Icons -->
@@ -17,14 +22,22 @@
 {#key data.url}
 	<div in:fly={{ x: 100, duration: 250 }} class="w-full h-full">
 		<!-- Menu -->
-		<div class="flex w-full justify-end pr-8 pt-6 fixed z-50">
+		<div class="flex w-full justify-end pr-8 pt-6 fixed z-50 space-x-4">
+			<!-- Search -->
+			{#if data.url == $back_url}
+				<Search />
+			{/if}
+			<!-- Search -->
+
+			<!-- Menu button -->
 			<button
 				on:click={() => (show_menu = true)}
 				class="rounded-full"
 				style="background-color: rgba(0, 0, 0, 0.5);"
-				><span class="material-symbols-outlined p-2">menu</span></button
+				><span class="material-symbols-outlined p-3">menu</span></button
 			>
 		</div>
+
 		{#if show_menu}
 			<div
 				class="transparent-div"
@@ -48,10 +61,6 @@
 				</div>
 			</div>
 		{/if}
-		<!-- Menu -->
-		<div class="opacity-0 hover:opacity-100 fixed">
-			<Theme />
-		</div>
 		<slot />
 	</div>
 {/key}

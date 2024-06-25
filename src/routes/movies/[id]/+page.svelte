@@ -1,6 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import { back_url } from '$lib/store.js';
+	import { fade } from 'svelte/transition';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
 	export let video;
@@ -20,7 +21,7 @@
 </div>
 
 <!-- Hero section -->
-<section class="h-[100vh] w-full relative flex flex-col">
+<section class="h-[100vh] w-full relative flex flex-col" transition:fade>
 	<img
 		src={`https://image.tmdb.org/t/p/original${data.data.backdrop_path}`}
 		class="opacity-30 object-cover absolute z-10 w-full h-full"

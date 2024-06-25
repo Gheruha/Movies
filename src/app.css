@@ -24,6 +24,7 @@ h1 {
 .movies-div {
 	padding-left: 80px;
 	padding-right: 80px;
+	
 }
 
 .details-img-div {
@@ -41,7 +42,7 @@ h1 {
 	padding-right: 160px;
 }
 
-.page-name{
+.page-name {
 	padding-left: 24px;
 	padding-top: 32px;
 	@apply text-2xl
@@ -50,6 +51,11 @@ h1 {
 .iframe-video {
 	width: 853px;
 	height: 505px;
+}
+
+.transparent-button{
+	background-color: rgba(0, 0, 0, 0.5);
+	@apply flex rounded-full hover:bg-white hover:border-zinc-300 hover:text-black transition-colors duration-200
 }
 
 @media (max-width: 1000px) {
@@ -85,8 +91,9 @@ h1 {
 }
 
 .menu_links {
-	@apply text-zinc-400 hover:text-white hover:scale-110 transition-all duration-300 
+	@apply text-zinc-400 hover:text-white hover:scale-110 transition-all duration-300
 }
+
 .transparent-div {
 	background-color: rgba(0, 0, 0, 0.8);
 	@apply flex fixed w-full h-full justify-center items-center text-2xl z-50;
@@ -96,5 +103,11 @@ h1 {
 	.iframe-video {
 		width: 460px;
 		height: 240px;
+	}
+}
+
+@media (max-width: 600px) {
+	.movie-card {
+		width: 80%;
 	}
 }

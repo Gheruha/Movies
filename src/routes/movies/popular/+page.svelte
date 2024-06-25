@@ -1,6 +1,9 @@
 <script>
+	// @ts-nocheck
+
 	import { back_url } from '$lib/store.js';
 	import MovieCard from '$lib/movieCard.svelte';
+	import { fade } from 'svelte/transition';
 
 	back_url.set('/movies/popular');
 

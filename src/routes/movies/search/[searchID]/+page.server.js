@@ -10,6 +10,7 @@ export async function load({ fetch, params }) {
 
 	if (res.ok) {
 		const data = await res.json();
+
 		return {
 			data: data.results,
 			searchID: params.searchID

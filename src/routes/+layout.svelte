@@ -2,14 +2,10 @@
 	// imports
 	import '../app.css';
 	import { fly } from 'svelte/transition';
-	import { back_url } from '$lib/store';
 	import Search from '$lib/search.svelte';
-
 	// local data
 	export let data;
-	let show_search_input = false;
 	let show_menu = false;
-	let search_input = '';
 </script>
 
 <!-- Icons -->
@@ -24,7 +20,7 @@
 		<!-- Menu -->
 		<div class="flex w-full justify-end pr-8 pt-6 fixed z-50 space-x-4">
 			<!-- Search -->
-			{#if data.url == $back_url}
+			{#if data.url != '/'}
 				<Search />
 			{/if}
 			<!-- Search -->
@@ -32,8 +28,7 @@
 			<!-- Menu button -->
 			<button
 				on:click={() => (show_menu = true)}
-				class="rounded-full"
-				style="background-color: rgba(0, 0, 0, 0.5);"
+				class="transparent-button"
 				><span class="material-symbols-outlined p-3">menu</span></button
 			>
 		</div>

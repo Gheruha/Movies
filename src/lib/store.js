@@ -1,3 +1,3 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
-export let back_url  = writable('/movies/popular')
+export let back_url = writable('/movies/popular');

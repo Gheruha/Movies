@@ -10,7 +10,9 @@
 	};
 
 	const goToSearchedMovie = () => {
-		goto(`search/${search_input}`);
+		if (search_input != '') {
+			goto(`search/${search_input}`);
+		}
 	};
 </script>
 
@@ -23,6 +25,7 @@
 	>
 		<form class="pt-1 pl-2" on:submit|preventDefault={goToSearchedMovie}>
 			<input
+				maxlength="24"
 				autofocus
 				type="text"
 				class="rounded-full w-80 text-zinc-300 p-2 focus:outline-none"
@@ -34,12 +37,9 @@
 		</form>
 	</div>
 {/if}
-<div
-	style="background-color: rgba(0, 0, 0, 0.5);"
-	class="flex rounded-full {show_search_input == true ? 'hidden' : ''} "
->
+<div class="{show_search_input == true ? 'hidden' : ''} ">
 	<button
-		class="material-symbols-outlined p-3"
+		class="material-symbols-outlined p-3 transparent-button"
 		on:click={() => (show_search_input = !show_search_input)}
 		>Search
 	</button>

@@ -39,7 +39,7 @@
 {/if}
 <div class="{show_search_input == true ? 'hidden' : ''} ">
 	<button
-		class="material-symbols-outlined p-3 transparent-button"
+		class="material-symbols-outlined p-3 transparent-button rounded-full"
 		on:click={() => (show_search_input = !show_search_input)}
 		>Search
 	</button>

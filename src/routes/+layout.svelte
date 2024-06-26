@@ -26,9 +26,7 @@
 			<!-- Search -->
 
 			<!-- Menu button -->
-			<button
-				on:click={() => (show_menu = true)}
-				class="transparent-button"
+			<button on:click={() => (show_menu = true)} class="transparent-button rounded-full"
 				><span class="material-symbols-outlined p-3">menu</span></button
 			>
 		</div>
@@ -51,7 +49,8 @@
 						>Upcoming Movies</a
 					>
 					<button on:click={() => (show_menu = false)} class="menu_links"
-						><span class="material-symbols-outlined p-2">close</span></button
+						><span class="material-symbols-outlined p-2" style="font-size: 40px;">close</span
+						></button
 					>
 				</div>
 			</div>

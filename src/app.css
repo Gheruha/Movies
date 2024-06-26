@@ -24,7 +24,10 @@ h1 {
 .movies-div {
 	padding-left: 80px;
 	padding-right: 80px;
-	
+}
+
+.first-movie-section{
+	@apply absolute flex flex-col pt-32 pl-16 w-2/4 items-start text-left
 }
 
 .details-img-div {
@@ -38,8 +41,10 @@ h1 {
 }
 
 .about-movie {
-	padding-left: 160px;
-	padding-right: 160px;
+	padding-left: 100px;
+	padding-right: 100px;
+
+	@apply pt-20 pb-40 flex flex-col items-center
 }
 
 .page-name {
@@ -55,7 +60,11 @@ h1 {
 
 .transparent-button{
 	background-color: rgba(0, 0, 0, 0.5);
-	@apply flex rounded-full hover:bg-white hover:border-zinc-300 hover:text-black transition-colors duration-200
+	@apply flex hover:bg-white hover:border-zinc-300 hover:text-black transition-all duration-200
+}
+
+.blob{
+	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob
 }
 
 @media (max-width: 1000px) {

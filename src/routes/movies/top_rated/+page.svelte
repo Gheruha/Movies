@@ -14,8 +14,8 @@
 </div>
 
 <!-- Movies Cards Div -->
-<div class="w-full h-full text-center pt-12 movies-div">
-	<div class="flex justify-between pt-44">
+<div class="w-full h-full text-center movies-div">
+	<div class="flex justify-between pt-12">
 		<MovieCard movies={data.data} />
 	</div>
 </div>

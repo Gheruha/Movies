@@ -12,7 +12,7 @@
 
 <!-- Navigation -->
 <div class="page-name">
-	<h1 class="">Popular Movies</h1>
+	<h1 class="font-medium">Popular Movies</h1>
 </div>
 
 <!-- Movies Cards Div -->

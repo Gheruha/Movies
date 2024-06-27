@@ -2,9 +2,10 @@
 	import { fly } from 'svelte/transition';
 	import { back_url } from '$lib/store.js';
 	import { fade } from 'svelte/transition';
+	import MovieCard from '$lib/movieCard.svelte';
 	export let data;
-	console.log(data);
 
+	console.log(data.recommendations);
 	let scroll = 0;
 </script>
 
@@ -55,6 +56,6 @@
 		<div class="blob bg-blue-300 w-96 h-96 -bottom-80 -left-30"></div>
 	</div>
 	<div class="z-50 w-4/5 h-96 bg-zinc-900 border-zinc-700 border rounded-lg opacity-80">
-		<p>Hello</p>
+		<MovieCard movies={data.recommendations.results} searchID="Recommandations" />
 	</div>
 </div>

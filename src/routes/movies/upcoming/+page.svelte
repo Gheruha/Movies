@@ -10,7 +10,7 @@
 
 <!-- Navigation -->
 <div class="page-name">
-	<h1 class="">Upcoming Movies</h1>
+	<h1 class="font-medium">Upcoming Movies</h1>
 </div>
 
 <!-- Movies Cards Div -->

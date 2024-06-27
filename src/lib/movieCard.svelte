@@ -4,7 +4,7 @@
 	import { back_url } from './store';
 	export let movies;
 	export let searchID;
-
+	
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.substring(0, maxLength) + '...';
@@ -24,8 +24,14 @@
 				alt="Movie Img"
 			/>
 			<div class="first-movie-section">
-				<h1 class="font-semibold text-6xl">{truncateText(movies[0].title, 30)}</h1>
-				<p class="font-normal pb-12">{truncateText(movies[0].overview, 292)}</p>
+				<h1 class="title">{truncateText(movies[0].title, 30)}</h1>
+				<div class="flex space-x-4 pb-4 pt-4">
+					<p class="font-normal text-zinc-300">{movies[0].release_date.slice(0, 4)}</p>
+					<p class="transparent-button font-normal pl-2 pr-2 rounded-lg">
+						{movies[0].vote_average.toFixed(1)}
+					</p>
+				</div>
+				<p class="font-normal pb-12">{truncateText(movies[0].overview, 192)}</p>
 
 				<!-- Action Buttons -->
 				<div class="flex space-x-4">
@@ -47,10 +53,10 @@
 	<!-- Showing the Header Movie-->
 
 	<!-- Showing the movies card-->
-	{#if movies.length != 0}
-		<div class="flex flex-wrap justify-around space-x-1 w-full">
+	<div class="flex flex-wrap justify-around space-x-1 w-full">
+		{#if movies.length != 0}
 			{#each movies as movie}
-				{#if movie.backdrop_path != null}
+				{#if movie.backdrop_path != null && movie.poster_path != null}
 					<div
 						class="movie-card mb-12 hover:opacity-50 hover:scale-105 transition-all duration-150"
 					>
@@ -66,24 +72,25 @@
 					</div>
 				{/if}
 			{/each}
-		</div>
 
-		<!-- Handling errors-->
-	{:else}
-		<div class="relative w-full justify-center max-w-lg -z-0">
-			<div class="blob bg-blue-500 w-72 h-72 -left-4"></div>
-			<div class="blob bg-blue-900 w-72 h-72 -right-4"></div>
-			<div class="blob bg-purple-500 w-72 h-72 -bottom-80 left-20"></div>
-		</div>
-		<div class="absolute pt-16 flex flex-col space-y-4">
-			<p class="text-xl font-semibold">
-				Sorry, there is no movie called {searchID}
-			</p>
+			<!-- Handling errors-->
+		{:else}
+			<div class="relative w-full pt-32 max-w-lg -z-0">
+				<div class="blob bg-blue-500 w-72 h-72 -left-4"></div>
+				<div class="blob bg-blue-900 w-72 h-72 -right-4"></div>
+				<div class="blob bg-purple-500 w-72 h-72 -bottom-80 left-20"></div>
 
-			<a href={$back_url} class="transparent-button flex justify-center p-2 rounded-lg">
-				<button> Go Back </button>
-			</a>
-		</div>
-	{/if}
+				<div class="absolute w-full flex flex-col items-center pt-16 space-y-4">
+					<p class="text-xl font-semibold">
+						Sorry, there is no movie called {searchID}
+					</p>
+
+					<a href={$back_url} class="transparent-button flex justify-center p-2 rounded-lg w-2/4">
+						<button> Go Back </button>
+					</a>
+				</div>
+			</div>
+		{/if}
+	</div>
 	<!-- Showing the movies card-->
 </div>

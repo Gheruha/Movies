@@ -9,7 +9,7 @@
 </script>
 
 <div class="page-name">
-	<h1 class="">{data.searchID} Movies</h1>
+	<h1 class="font-medium">{data.searchID} Movies</h1>
 </div>
 
 <!-- Movies Cards Div -->

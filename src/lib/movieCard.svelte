@@ -4,7 +4,7 @@
 	import { back_url } from './store';
 	export let movies;
 	export let searchID;
-	
+
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.substring(0, maxLength) + '...';
@@ -28,6 +28,7 @@
 				<div class="flex space-x-4 pb-4 pt-4">
 					<p class="font-normal text-zinc-300">{movies[0].release_date.slice(0, 4)}</p>
 					<p class="transparent-button font-normal pl-2 pr-2 rounded-lg">
+						<span class="material-symbols-outlined pt-1 pr-1" style="font-size: 1rem"> star </span>
 						{movies[0].vote_average.toFixed(1)}
 					</p>
 				</div>
@@ -58,16 +59,16 @@
 			{#each movies as movie}
 				{#if movie.backdrop_path != null && movie.poster_path != null}
 					<div
-						class="movie-card mb-12 hover:opacity-50 hover:scale-105 transition-all duration-150"
+						class="movie-card mb-12 hover:opacity-50 hover:scale-105 transition-all duration-150 text-left"
 					>
 						<a href={'/movies/' + movie.id}>
 							<img
 								src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 								alt=""
-								class="rounded-lg"
+								class="rounded-lg poster"
 							/>
-							<h1 class="text-xl font-medium">{movie.original_title}</h1>
-							<p>{movie.release_date}</p>
+							<h1 class="text-lg font-medium">{movie.original_title}</h1>
+							<p class="text-sm">{movie.release_date}</p>
 						</a>
 					</div>
 				{/if}

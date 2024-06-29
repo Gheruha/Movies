@@ -39,11 +39,6 @@ h1 {
 	padding-right: 80px;
 }
 
-.overflow-p {
-	padding-left: 160px;
-	padding-right: 160px;
-}
-
 .about-movie {
 	padding-left: 100px;
 	padding-right: 100px;
@@ -60,6 +55,26 @@ h1 {
 .iframe-video {
 	width: 853px;
 	height: 505px;
+}
+
+.recommendations-container {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	padding: 1rem;
+	padding-top: 2.5rem;
+	gap: 1rem;
+}
+
+.recommendation-card {
+	flex: 0 0 auto;
+	width: 200px;
+	text-align: center;
+}
+.poster {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
 }
 
 .transparent-button{

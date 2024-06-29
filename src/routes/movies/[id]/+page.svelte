@@ -4,6 +4,7 @@
 	import { back_url } from '$lib/store.js';
 	import { fade } from 'svelte/transition';
 	import Recommendations from '$lib/recommendations.svelte';
+	import Actors from '$lib/actors.svelte';
 	export let data;
 
 	console.log(data);
@@ -23,23 +24,26 @@
 
 <!-- Hero section -->
 <section class="h-[100vh] w-full relative flex flex-col" transition:fade>
+	<!-- Backdrop Image -->
 	<img
 		src={`https://image.tmdb.org/t/p/original${data.data.backdrop_path}`}
 		class="opacity-20 object-cover absolute z-10 w-full h-full"
 		alt=""
 	/>
 
-	<!-- Title and overview-->
+	<!-- Description -->
 	<div
 		in:fly={{ x: 100, duration: 500 }}
 		class="flex items-center justify-center details-img-div absolute h-full"
 	>
 		<div class="flex">
+			<!-- Poster Image -->
 			<img
 				src={`https://image.tmdb.org/t/p/w500${data.data.poster_path}`}
 				alt=""
 				class="rounded-lg z-50 h-96"
 			/>
+			<!-- Poster Image -->
 			<div class="flex flex-col pl-10">
 				<h1 class="text-6xl font-semibold font-sans text-white">{data.data.original_title}</h1>
 
@@ -63,6 +67,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Description -->
 
 	<!-- Details Btn -->
 	<div class="absolute flex items-end justify-center w-full h-full pb-16">
@@ -77,30 +82,26 @@
 
 <!-- Details -->
 <div class="about-movie" style:transform={`translate3d(0, ${scroll * 0.5}px , 0)`}>
-	<!-- <VideoPlayer videos={data.video} /> -->
+	<!-- Actors-->
+	{#if data.actors.length != 0}
+		<h1 class="text-2xl font-semibold pb-4 w-full text-left">Top Billed Cast</h1>
+		<div class="z-50 flex w-full bg-zinc-900 border-zinc-800 border rounded-lg">
+			<Actors actors={data.actors.cast} />
+		</div>
+	{/if}
+	<!-- Actors-->
 
 	<!-- Recommendations -->
 	{#if data.recommendations.results.length != 0}
-		<h1 class="text-4xl font-semibold z-50 pb-10 w-full text-left">You may also like:</h1>
+		<h1 class="text-2xl font-semibold z-50 pt-12 pb-4 w-full text-left">You may also like</h1>
 		<div class="relative w-full max-w-lg -z-0">
 			<div class="blob bg-violet-500 w-96 h-96 -right-5"></div>
 			<div class="blob bg-blue-300 w-96 h-96 -bottom-80 -left-30"></div>
 		</div>
-		<div class="z-50 flex w-full h-96 bg-zinc-900 border-zinc-600 border rounded-lg">
+		<div class="z-50 flex w-full h-50 bg-zinc-900 border-zinc-800 border rounded-lg">
 			<Recommendations movies={data.recommendations.results} />
 		</div>
 	{/if}
 	<!-- Recommendations -->
 </div>
-
-<!-- <div class="flex space-x-2 pt-10">
-					{#each data.data.production_companies as production_companies}
-						{#if production_companies.logo_path != null}
-							<img
-								src={`https://image.tmdb.org/t/p/w500${production_companies.logo_path}`}
-								alt="logo"
-								class="z-50 w-8"
-							/>
-						{/if}
-					{/each}
-</div> -->
+<!-- Details -->

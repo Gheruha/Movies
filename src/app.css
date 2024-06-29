@@ -68,9 +68,10 @@ h1 {
 
 .recommendation-card {
 	flex: 0 0 auto;
-	width: 200px;
+	width: 150px;
 	text-align: center;
 }
+
 .poster {
 	width: 100%;
 	height: auto;

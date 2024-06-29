@@ -10,15 +10,21 @@ export async function load({ fetch, params }) {
 		`https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=${VITE_KEY}`
 	);
 
+	const actors = await fetch(
+		`https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${VITE_KEY}`
+	);
+
 	const movieDetail = await res.json();
 	const videoDetail = await video.json();
 	const recommendationsDetail = await recommendations.json();
+	const actorsDetail = await actors.json();
 
 	if (res.ok) {
 		return {
 			data: movieDetail,
 			video: videoDetail,
-			recommendations: recommendationsDetail
+			recommendations: recommendationsDetail,
+			actors: actorsDetail
 		};
 	}
 }

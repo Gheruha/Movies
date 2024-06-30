@@ -38,7 +38,7 @@
 				<div class="flex space-x-4">
 					<button class="flex bg-white text-black rounded-lg p-2 space-x-2 hover:bg-gray-200">
 						<span class="material-symbols-outlined"> play_arrow </span>
-						<p class="pr-2 font-normal">Play Movie</p></button
+						<p class="pr-2 font-normal">Play Video</p></button
 					>
 					<a href={'/movies/' + movies[0].id}>
 						<button class="transparent-button rounded-lg p-2 space-x-2">

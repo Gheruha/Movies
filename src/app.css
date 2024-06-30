@@ -53,8 +53,8 @@ h1 {
 }
 
 .iframe-video {
-	width: 853px;
-	height: 505px;
+	width: 1080px;
+	height: 700px;
 }
 
 .recommendations-container {
@@ -64,6 +64,10 @@ h1 {
 	padding: 1rem;
 	padding-top: 2.5rem;
 	gap: 1rem;
+}
+
+.center-div {
+	@apply flex fixed w-full h-full justify-center items-center;
 }
 
 .recommendation-card {

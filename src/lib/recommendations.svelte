@@ -2,7 +2,7 @@
 	export let movies;
 </script>
 
-<div class="recommendations-container">
+<div class="recommendations-container pr-4 pt-4 pb-4">
 	{#each movies as movie}
 		{#if movie.backdrop_path != null && movie.poster_path != null}
 			<div class="recommendation-card hover:opacity-80 hover:scale-105 transition-all duration-150">

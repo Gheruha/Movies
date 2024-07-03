@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities{
+	.animation-delay-2000{
+		animation-delay: 2s;
+	}
+
+	.animation-delay-4000{
+		animation-delay: 4s;
+	}
+}
+
 body {
 	transition:
 		background-color 0.2s ease-in-out,
 		color 0.2s ease-in-out;
-	@apply bg-white dark:bg-zinc-900 text-black dark:text-white;
+	@apply bg-white dark:bg-zinc-950 text-black dark:text-white;
 }
 
 p {
@@ -43,7 +53,7 @@ h1 {
 	padding-left: 100px;
 	padding-right: 100px;
 
-	@apply pt-20 pb-40 flex flex-col items-center
+	@apply pt-20 pb-40 flex flex-col 
 }
 
 .page-name {
@@ -61,8 +71,6 @@ h1 {
 	display: flex;
 	flex-wrap: nowrap;
 	overflow-x: auto;
-	padding: 1rem;
-	padding-top: 2.5rem;
 	gap: 1rem;
 }
 
@@ -88,7 +96,7 @@ h1 {
 }
 
 .blob{
-	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob
+	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70
 }
 
 @media (max-width: 1200px) {

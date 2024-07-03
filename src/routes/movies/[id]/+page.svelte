@@ -7,6 +7,7 @@
 	import Actors from '$lib/actors.svelte';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
+	console.log(data);
 
 	let scroll = 0;
 	let show_video = false;
@@ -97,29 +98,50 @@
 
 <!-- Details -->
 <div class="about-movie" style:transform={`translate3d(0, ${scroll * 0.5}px , 0)`}>
-	<!-- Actors-->
 	{#if data.actors.length != 0}
 		<h1 class="text-2xl font-semibold pb-4 w-full text-left">Top Billed Cast</h1>
-		<div class="relative w-full max-w-lg -z-0">
-			<div class="blob bg-blue-200 w-96 h-96 -right-5"></div>
-			<div class="blob bg-white w-96 h-96 -bottom-80 -left-30"></div>
-		</div>
-		<div class="z-50 flex w-full bg-zinc-900 border-zinc-800 border rounded-lg">
-			<Actors actors={data.actors.cast} />
+		<div class="w-full flex space-x-10 z-50">
+			<!-- Actors -->
+			<div class="z-50 flex w-3/4">
+				<Actors actors={data.actors.cast} />
+			</div>
+			<!-- Actors -->
+
+			<!-- Other details -->
+			<div class="flex flex-col w-1/4 space-y-8 rounded-lg pl-4 pr-4">
+				<div class="relative w-full max-w-lg -z-0">
+					<div class="blob animate-blob animation-delay-4000 bg-blue-600 w-96 h-96 -right-5"></div>
+					<div class="blob animate-blob bg-blue-400 w-96 h-96 -bottom-80 -left-30"></div>
+				</div>
+				<div class="z-50">
+					<h1 class="font-semibold text-xl">Status</h1>
+					<p class="font-normal">{data.data.status}</p>
+				</div>
+				<div class="z-50">
+					<h1 class="font-semibold text-xl">Original Language</h1>
+					<p class="font-normal">{data.data.spoken_languages[0].english_name}</p>
+				</div>
+				<div class="z-50">
+					<h1 class="font-semibold text-xl">Budget</h1>
+					<p class="font-normal">
+						${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "-"}
+					</p>
+				</div>
+				<div class="z-50">
+					<h1 class="font-semibold text-xl">Revenue</h1>
+					<p class="font-normal">
+						${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "-"}
+					</p>
+				</div>
+			</div>
+			<!-- Other details -->
 		</div>
 	{/if}
-	<!-- Actors-->
-
-	<!-- Videos -->
-	<div class="pt-12 z-50">
-		<!-- <VideoPlayer videos={data.video} /> -->
-	</div>
-	<!-- Videos -->
 
 	<!-- Recommendations -->
 	{#if data.recommendations.results.length != 0}
 		<h1 class="text-2xl font-semibold z-50 pt-12 pb-4 w-full text-left">You may also like</h1>
-		<div class="z-50 flex w-full h-50 bg-zinc-900 border-zinc-800 border rounded-lg">
+		<div class="z-50 flex w-full h-50 bg-zinc-950 border-zinc-800 border rounded-lg">
 			<Recommendations movies={data.recommendations.results} />
 		</div>
 	{/if}

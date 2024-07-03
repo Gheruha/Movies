@@ -77,9 +77,9 @@
 			<!-- Handling errors-->
 		{:else}
 			<div class="relative w-full pt-32 max-w-lg -z-0">
-				<div class="blob bg-blue-500 w-72 h-72 -left-4"></div>
-				<div class="blob bg-blue-900 w-72 h-72 -right-4"></div>
-				<div class="blob bg-purple-500 w-72 h-72 -bottom-80 left-20"></div>
+				<div class="blob animate-blob animation-delay-4000 bg-blue-500 w-72 h-72 -left-4 animation-delay-4000"></div>
+				<div class="blob animate-blob bg-blue-800 w-72 h-72 -right-4"></div>
+				<div class="blob animate-blob animation-delay-2000 bg-blue-500 w-72 h-72 -bottom-80 left-20 animation-delay-2000"></div>
 
 				<div class="absolute w-full flex flex-col items-center pt-16 space-y-4">
 					<p class="text-xl font-semibold">

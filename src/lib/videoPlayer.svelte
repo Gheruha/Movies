@@ -12,7 +12,7 @@
 			<!-- Backdrop Image -->
 			<img
 				src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-				class="opacity-100 object-cover absolute w-full h-full grayscale"
+				class="opacity-100 object-cover absolute w-full h-full filter blur-lg"
 				alt=""
 			/>
 			<div class="flex items-center justify-center details-img-div absolute h-full">

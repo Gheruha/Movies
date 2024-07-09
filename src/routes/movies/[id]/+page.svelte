@@ -7,10 +7,17 @@
 	import Actors from '$lib/actors.svelte';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
-	console.log(data);
 
 	let scroll = 0;
 	let show_video = false;
+	function ScrollToSection() {
+		const section = document.getElementById('content');
+		if (section) {
+			section.scrollIntoView({
+				behavior: 'smooth'
+			});
+		}
+	}
 </script>
 
 <!-- Binding the scrollY value -->
@@ -30,7 +37,11 @@
 </div>
 
 <!-- Hero section -->
-<section class="h-[100vh] w-full relative flex flex-col" transition:fade>
+<section
+	class="h-[100vh] w-full relative flex flex-col"
+	transition:fade
+	style:transform={`translate3d(0, ${scroll * -2}px , 0)`}
+>
 	<!-- Backdrop Image -->
 	<img
 		src={`https://image.tmdb.org/t/p/original${data.data.backdrop_path}`}
@@ -67,14 +78,19 @@
 						{data.data.vote_average.toFixed(1)}
 					</p>
 				</div>
+
 				<div class="pt-4 z-40">
-					<button
-						on:click={() => (show_video = true)}
-						class="flex transparent-button rounded-lg p-2 space-x-2"
-					>
-						<span class="material-symbols-outlined"> play_arrow </span>
-						<p class="pr-2 font-normal">Trailer</p></button
-					>
+					<!-- Trailer -->
+					{#if data.video.results.length > 0}
+						<button
+							on:click={() => (show_video = true)}
+							class="flex transparent-button rounded-lg p-2 space-x-2"
+						>
+							<span class="material-symbols-outlined"> play_arrow </span>
+							<p class="pr-2 font-normal">Trailer</p></button
+						>
+					{/if}
+					<!-- Trailer -->
 				</div>
 				<div>
 					<h1 class="text-2xl font-semibold">Overview</h1>
@@ -87,7 +103,7 @@
 
 	<!-- Details Btn -->
 	<div class="absolute flex items-end justify-center w-full h-full pb-16">
-		<button class="z-40 transparent-button rounded-full"
+		<button on:click={() => ScrollToSection()} class="z-40 transparent-button rounded-full"
 			><span class="material-symbols-outlined p-2" style="font-size: 40px;">
 				arrow_downward
 			</span></button
@@ -97,7 +113,7 @@
 <!-- Hero section -->
 
 <!-- Details -->
-<div class="about-movie" style:transform={`translate3d(0, ${scroll * 0.5}px , 0)`}>
+<div class="about-movie" id="content">
 	{#if data.actors.length != 0}
 		<h1 class="text-2xl font-semibold pb-4 w-full text-left">Top Billed Cast</h1>
 		<div class="w-full flex space-x-10 z-50">
@@ -124,13 +140,13 @@
 				<div class="z-50">
 					<h1 class="font-semibold text-xl">Budget</h1>
 					<p class="font-normal">
-						${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "-"}
+						${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '-'}
 					</p>
 				</div>
 				<div class="z-50">
 					<h1 class="font-semibold text-xl">Revenue</h1>
 					<p class="font-normal">
-						${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "-"}
+						${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '-'}
 					</p>
 				</div>
 			</div>

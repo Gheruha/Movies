@@ -59,7 +59,7 @@
 			{#each movies as movie}
 				{#if movie.backdrop_path != null && movie.poster_path != null}
 					<div
-						class="movie-card mb-12 hover:opacity-50 hover:scale-105 transition-all duration-150 text-left"
+						class="movie-card mb-12  hover:scale-105 hover:grayscale transition-all duration-150 text-left"
 					>
 						<a href={'/movies/' + movie.id}>
 							<img

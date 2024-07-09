@@ -55,7 +55,9 @@
 				</div>
 			</div>
 		{/if}
-		<slot />
+		<div class={show_menu ? 'filter blur' : ''}>
+			<slot />
+		</div>
 	</div>
 {/key}
 <!-- Pages & Animation -->

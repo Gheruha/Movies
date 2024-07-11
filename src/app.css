@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities{
-	.animation-delay-2000{
+@layer utilities {
+	.animation-delay-2000 {
 		animation-delay: 2s;
 	}
 
-	.animation-delay-4000{
+	.animation-delay-4000 {
 		animation-delay: 4s;
 	}
 }
@@ -36,12 +36,12 @@ h1 {
 	padding-right: 80px;
 }
 
-.first-movie-section{
-	@apply absolute flex flex-col pt-32 pl-16 w-2/4 items-start text-left
+.first-movie-section {
+	@apply absolute flex flex-col pt-32 pl-16 w-2/4 items-start text-left;
 }
 
-.title{
-	@apply font-semibold text-6xl
+.title {
+	@apply font-semibold text-6xl;
 }
 
 .details-img-div {
@@ -53,13 +53,13 @@ h1 {
 	padding-left: 100px;
 	padding-right: 100px;
 
-	@apply pt-20 pb-40 flex flex-col 
+	@apply pt-20 pb-40 flex flex-col;
 }
 
 .page-name {
 	padding-left: 24px;
 	padding-top: 32px;
-	@apply text-2xl
+	@apply text-2xl;
 }
 
 .iframe-video {
@@ -90,13 +90,13 @@ h1 {
 	object-fit: cover;
 }
 
-.transparent-button{
+.transparent-button {
 	background-color: rgba(0, 0, 0, 0.5);
-	@apply flex hover:bg-white hover:border-zinc-300 hover:text-black transition-all duration-200
+	@apply flex hover:bg-white hover:border-zinc-300 hover:text-black transition-all duration-200;
 }
 
-.blob{
-	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70
+.blob {
+	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70;
 }
 
 @media (max-width: 1200px) {
@@ -104,12 +104,12 @@ h1 {
 		width: 20%;
 	}
 
-	.first-movie-section{
-		@apply  pt-16 pl-6 w-3/4 items-start text-left
+	.first-movie-section {
+		@apply pt-16 pl-6 w-3/4 items-start text-left;
 	}
 
-	.title{
-		@apply text-5xl
+	.title {
+		@apply text-5xl;
 	}
 
 	.movies-div {
@@ -136,11 +136,10 @@ h1 {
 		width: 560px;
 		height: 340px;
 	}
-
 }
 
 .menu_links {
-	@apply text-zinc-400 hover:text-white hover:scale-110 transition-all duration-300
+	@apply text-zinc-400 hover:text-white hover:scale-110 transition-all duration-300;
 }
 
 .transparent-div {
@@ -158,12 +157,12 @@ h1 {
 		width: 30%;
 	}
 
-	.first-movie-section{
-		@apply  pt-8 pl-6 w-full items-start text-left
+	.first-movie-section {
+		@apply pt-8 pl-6 w-full items-start text-left;
 	}
 
-	.title{
-		@apply text-4xl
+	.title {
+		@apply text-4xl;
 	}
 }
 
@@ -172,7 +171,7 @@ h1 {
 		width: 40%;
 	}
 
-	.title{
-		@apply text-3xl
+	.title {
+		@apply text-3xl;
 	}
 }

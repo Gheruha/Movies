@@ -1,23 +1,31 @@
 <!-- Movie Details -->
 <script>
 	import { fly } from 'svelte/transition';
-	import { back_url } from '$lib/store.js';
+	import { back_url, temporary_url } from '$lib/store.js';
 	import { fade } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 	import Recommendations from '$lib/recommendations.svelte';
 	import Actors from '$lib/actors.svelte';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
 
+	// Local
 	let scroll = 0;
 	let show_video = false;
-	function ScrollToSection() {
+
+	const ScrollToSection = () => {
 		const section = document.getElementById('content');
 		if (section) {
 			section.scrollIntoView({
 				behavior: 'smooth'
 			});
 		}
-	}
+	};
+
+	const playTrailer = () => {
+		temporary_url.set(`/movies/${data.data.id}`);
+		goto(`/movies/trailer/${data.video.id}`);
+	};
 </script>
 
 <!-- Binding the scrollY value -->
@@ -33,7 +41,6 @@
 	<a href={$back_url} class="z-50 text-white"
 		><span class="material-symbols-outlined"> arrow_back_ios </span></a
 	>
-	<h1>Movie Details</h1>
 </div>
 
 <!-- Hero section -->
@@ -83,7 +90,7 @@
 					<!-- Trailer -->
 					{#if data.video.results.length > 0}
 						<button
-							on:click={() => (show_video = true)}
+							on:click={() => playTrailer()}
 							class="flex transparent-button rounded-lg p-2 space-x-2"
 						>
 							<span class="material-symbols-outlined"> play_arrow </span>
@@ -119,7 +126,7 @@
 		<div class="w-full flex space-x-10 z-50">
 			<!-- Actors -->
 			<div class="z-50 flex w-3/4">
-				<Actors actors={data.actors.cast} />
+				<Actors actors={data.actors.cast} back_url={`/movies/${data.data.id}`} />
 			</div>
 			<!-- Actors -->
 
@@ -140,13 +147,17 @@
 				<div class="z-50">
 					<h1 class="font-semibold text-xl">Budget</h1>
 					<p class="font-normal">
-						${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '-'}
+						{data.data.budget
+							? `$${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+							: '-'}
 					</p>
 				</div>
 				<div class="z-50">
 					<h1 class="font-semibold text-xl">Revenue</h1>
 					<p class="font-normal">
-						${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '-'}
+						{data.data.revenue
+							? `$${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+							: '-'}
 					</p>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ export async function load({ fetch, params }) {
 	const video = await fetch(
 		`https://api.themoviedb.org/3/movie/${params.id}/videos?api_key=${VITE_KEY}`
 	);
+
 	const recommendations = await fetch(
 		`https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=${VITE_KEY}`
 	);

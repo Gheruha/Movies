@@ -1,6 +1,6 @@
 <script>
 	import Recommendations from '$lib/recommendations.svelte';
-	import { back_url } from '$lib/store';
+	import { temporary_url } from '$lib/store';
 	import { fade } from 'svelte/transition';
 	export let data;
 
@@ -27,7 +27,7 @@
 
 <!-- Navigation -->
 <div class="pt-8 nav flex pl-6 absolute">
-	<a href={$back_url} class="z-50 text-white"
+	<a href={$temporary_url} class="z-50 text-white"
 		><span class="material-symbols-outlined"> arrow_back_ios </span></a
 	>
 </div>

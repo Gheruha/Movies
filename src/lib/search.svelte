@@ -11,7 +11,7 @@
 
 	const goToSearchedMovie = () => {
 		if (search_input != '') {
-			goto(`search/${search_input}`);
+			goto(`/movies/search/${search_input}`);
 		}
 	};
 </script>
@@ -37,6 +37,7 @@
 		</form>
 	</div>
 {/if}
+
 <div class="{show_search_input == true ? 'hidden' : ''} ">
 	<button
 		class="material-symbols-outlined p-3 transparent-button rounded-full"

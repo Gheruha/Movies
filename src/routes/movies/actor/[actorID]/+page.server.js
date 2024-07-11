@@ -8,8 +8,6 @@ export async function load({ fetch, params }) {
 		`https://api.themoviedb.org/3/person/${params.actorID}?api_key=${VITE_KEY}`
 	);
 
-	console.log(params.actorID);
-
 	const credits = await fetch(
 		`https://api.themoviedb.org/3/person/${params.actorID}/movie_credits?api_key=${VITE_KEY}`
 	);

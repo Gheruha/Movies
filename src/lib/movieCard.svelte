@@ -1,16 +1,21 @@
 <script>
-	// @ts-nocheck
-
-	import { back_url } from './store';
+	import { goto } from '$app/navigation';
+	import { back_url, temporary_url } from './store';
 	export let movies;
 	export let searchID;
 
+	// @ts-ignore
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.substring(0, maxLength) + '...';
 		}
 		return text;
 	}
+
+	const playTrailer = () => {
+		temporary_url.set($back_url);
+		goto(`/movies/trailer/${movies[0].id}`);
+	};
 </script>
 
 <div class="w-full">
@@ -36,9 +41,12 @@
 
 				<!-- Action Buttons -->
 				<div class="flex space-x-4">
-					<button class="flex bg-white text-black rounded-lg p-2 space-x-2 hover:bg-gray-200">
+					<button
+						on:click={() => playTrailer()}
+						class="flex bg-white text-black rounded-lg p-2 space-x-2 hover:bg-gray-200"
+					>
 						<span class="material-symbols-outlined"> play_arrow </span>
-						<p class="pr-2 font-normal">Play Video</p></button
+						<p class="pr-2 font-normal">Play Trailer</p></button
 					>
 					<a href={'/movies/' + movies[0].id}>
 						<button class="transparent-button rounded-lg p-2 space-x-2">
@@ -59,7 +67,7 @@
 			{#each movies as movie}
 				{#if movie.backdrop_path != null && movie.poster_path != null}
 					<div
-						class="movie-card mb-12  hover:scale-105 hover:grayscale transition-all duration-150 text-left"
+						class="movie-card mb-12 hover:scale-105 hover:opacity-50 transition-all duration-150 text-left"
 					>
 						<a href={'/movies/' + movie.id}>
 							<img
@@ -77,9 +85,13 @@
 			<!-- Handling errors-->
 		{:else}
 			<div class="relative w-full pt-32 max-w-lg -z-0">
-				<div class="blob animate-blob animation-delay-4000 bg-blue-500 w-72 h-72 -left-4 animation-delay-4000"></div>
+				<div
+					class="blob animate-blob animation-delay-4000 bg-blue-500 w-72 h-72 -left-4 animation-delay-4000"
+				></div>
 				<div class="blob animate-blob bg-blue-800 w-72 h-72 -right-4"></div>
-				<div class="blob animate-blob animation-delay-2000 bg-blue-500 w-72 h-72 -bottom-80 left-20 animation-delay-2000"></div>
+				<div
+					class="blob animate-blob animation-delay-2000 bg-blue-500 w-72 h-72 -bottom-80 left-20 animation-delay-2000"
+				></div>
 
 				<div class="absolute w-full flex flex-col items-center pt-16 space-y-4">
 					<p class="text-xl font-semibold">

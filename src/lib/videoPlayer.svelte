@@ -2,11 +2,12 @@
 	import { fade } from 'svelte/transition';
 	export let videos;
 	export let backdrop_path;
+
 	let video_num = 0;
 	let video_res_size = videos.results.length;
 </script>
 
-<div class="center-div z-50" transition:fade>
+<div class="center-div z-10" transition:fade>
 	{#if video_res_size > 0}
 		<section class="h-[100vh] w-full relative flex flex-col">
 			<!-- Backdrop Image -->

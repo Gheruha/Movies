@@ -2,6 +2,7 @@
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	import { temporary_url } from '$lib/store.js';
 	export let data;
+	console.log($temporary_url);
 </script>
 
 <!-- Navigation -->

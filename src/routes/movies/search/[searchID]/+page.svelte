@@ -4,7 +4,7 @@
 
 	export let data;
 	if (data.data.length != 0) {
-		back_url.set(`search/${data.searchID}`);
+		back_url.set(`/movies/search/${data.searchID}`);
 	}
 </script>
 

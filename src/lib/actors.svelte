@@ -19,7 +19,7 @@
 	};
 </script>
 
-<div class="recommendations-container">
+<div class="recommendations-container z-40">
 	{#each actors as actor}
 		{#if actor.profile_path != null}
 			<button

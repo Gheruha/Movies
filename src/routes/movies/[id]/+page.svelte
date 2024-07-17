@@ -1,17 +1,21 @@
 <!-- Movie Details -->
 <script>
 	import { fly } from 'svelte/transition';
+	import { browser } from '$app/environment';
 	import { back_url, temporary_url } from '$lib/store.js';
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import Recommendations from '$lib/recommendations.svelte';
 	import Actors from '$lib/actors.svelte';
 	import VideoPlayer from '$lib/videoPlayer.svelte';
 	export let data;
 
 	// Local
+	let show_more = false;
 	let scroll = 0;
 	let show_video = false;
+	let innerWidth = 0;
 
 	const ScrollToSection = () => {
 		const section = document.getElementById('content');
@@ -26,15 +30,46 @@
 		temporary_url.set(`/movies/${data.data.id}`);
 		goto(`/movies/trailer/${data.video.id}`);
 	};
+
+	//@ts-ignore
+	function truncateText(text, maxLength) {
+		if (text.length > maxLength) {
+			return text.substring(0, maxLength) + '...';
+		}
+		return text;
+	}
+
+	onMount(() => {
+		function onResize() {
+			innerWidth = window.innerWidth;
+		}
+
+		window.addEventListener('resize', onResize);
+		return () => window.removeEventListener('resize', onResize);
+	});
 </script>
 
 <!-- Binding the scrollY value -->
-<svelte:window bind:scrollY={scroll} />
+<svelte:window bind:scrollY={scroll} bind:innerWidth />
 
 <!-- Showing videos if the user wants -->
 {#if show_video}
 	<VideoPlayer videos={data.video} backdrop_path={data.data.backdrop_path} />
 {/if}
+
+<!-- More of the overview -->
+{#if show_more}
+	<div class="transparent-div flex flex-col" transition:fade>
+		<div class="show_more-div" style="height: 580px;">
+			<h1 class="pt-4 text-2xl font-semibold">Overview</h1>
+			<p class="pt-2 text-sm font-medium">{data.data.overview}</p>
+		</div>
+		<button on:click={() => (show_more = false)} class="menu_links"
+			><span class="material-symbols-outlined p-2" style="font-size: 40px;">close</span></button
+		>
+	</div>
+{/if}
+<!-- More of the overview -->
 
 <!-- Navigation -->
 <div class="pt-8 nav flex pl-6 absolute">
@@ -45,7 +80,7 @@
 
 <!-- Hero section -->
 <section
-	class="h-[100vh] w-full relative flex flex-col"
+	class="h-[100vh] w-full relative flex flex-col {show_more ? 'filter blur' : ''}"
 	transition:fade
 	style:transform={`translate3d(0, ${scroll * -2}px , 0)`}
 >
@@ -63,14 +98,19 @@
 	>
 		<div class="flex">
 			<!-- Poster Image -->
-			<img
-				src={`https://image.tmdb.org/t/p/w500${data.data.poster_path}`}
-				alt=""
-				class="rounded-lg z-40 h-96"
-			/>
+			{#if innerWidth > 800}
+				<img
+					src={`https://image.tmdb.org/t/p/w500${data.data.poster_path}`}
+					alt=""
+					class="rounded-lg z-40 h-96"
+				/>
+			{/if}
 			<!-- Poster Image -->
-			<div class="flex flex-col pl-10">
-				<h1 class="text-6xl font-semibold font-sans text-white">{data.data.original_title}</h1>
+
+			<!-- Details -->
+			<div class="details">
+				<p class="font-normal">{innerWidth}</p>
+				<h1 class="title">{data.data.original_title}</h1>
 
 				<div class="flex space-x-2">
 					{#each data.data.genres as genres}
@@ -101,9 +141,20 @@
 				</div>
 				<div>
 					<h1 class="text-2xl font-semibold">Overview</h1>
-					<p class="text-md font-semibold w-4/5">{data.data.overview}</p>
+					<p class="text-md font-semibold w-4/5 {innerWidth < 1000 ? 'w-full' : ''}">
+						{truncateText(data.data.overview, 300)}
+					</p>
+				</div>
+
+				<div class="z-40 pt-4">
+					{#if data.data.overview.length > 300}
+						<button on:click={() => (show_more = true)} class="transparent-button p-2 rounded-lg"
+							>Read More</button
+						>
+					{/if}
 				</div>
 			</div>
+			<!-- Details -->
 		</div>
 	</div>
 	<!-- Description -->
@@ -123,42 +174,53 @@
 <div class="about-movie" id="content">
 	{#if data.actors.length != 0}
 		<h1 class="text-2xl font-semibold pb-4 w-full text-left">Top Billed Cast</h1>
-		<div class="w-full flex space-x-10 z-50">
+		<div class="other-details">
 			<!-- Actors -->
-			<div class="z-50 flex w-3/4">
+			<div class="actors-div">
 				<Actors actors={data.actors.cast} back_url={`/movies/${data.data.id}`} />
 			</div>
 			<!-- Actors -->
 
 			<!-- Other details -->
-			<div class="flex flex-col w-1/4 space-y-8 rounded-lg pl-4 pr-4">
-				<div class="relative w-full max-w-lg -z-0">
-					<div class="blob animate-blob animation-delay-4000 bg-blue-600 w-96 h-96 -right-5"></div>
-					<div class="blob animate-blob bg-blue-400 w-96 h-96 -bottom-80 -left-30"></div>
-				</div>
-				<div class="z-50">
-					<h1 class="font-semibold text-xl">Status</h1>
-					<p class="font-normal">{data.data.status}</p>
-				</div>
-				<div class="z-50">
-					<h1 class="font-semibold text-xl">Original Language</h1>
-					<p class="font-normal">{data.data.spoken_languages[0].english_name}</p>
-				</div>
-				<div class="z-50">
-					<h1 class="font-semibold text-xl">Budget</h1>
-					<p class="font-normal">
-						{data.data.budget
-							? `$${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-							: '-'}
-					</p>
-				</div>
-				<div class="z-50">
-					<h1 class="font-semibold text-xl">Revenue</h1>
-					<p class="font-normal">
-						{data.data.revenue
-							? `$${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-							: '-'}
-					</p>
+			<div class="flex flex-col w-full space-y-8 rounded-lg pl-4 pr-4">
+				{#if innerWidth > 800}
+					<div class="relative w-full max-w-lg -z-0">
+						<div
+							class="blob animate-blob animation-delay-4000 bg-blue-600 w-96 h-96 -right-5"
+						></div>
+						<div class="blob animate-blob bg-blue-400 w-96 h-96 -bottom-80 -left-30"></div>
+					</div>
+				{:else}
+					<div class="relative w-full max-w-lg -z-0">
+						<div class="blob animate-blob animation-delay-4000 bg-blue-600 w-80 h-80 top-12"></div>
+					</div>
+				{/if}
+
+				<div class="basic-info">
+					<div>
+						<h1 class="font-semibold text-xl">Status</h1>
+						<p class="font-normal">{data.data.status}</p>
+					</div>
+					<div>
+						<h1 class="font-semibold text-xl">Original Language</h1>
+						<p class="font-normal">{data.data.spoken_languages[0].english_name}</p>
+					</div>
+					<div>
+						<h1 class="font-semibold text-xl">Budget</h1>
+						<p class="font-normal">
+							{data.data.budget
+								? `$${data.data.budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+								: '-'}
+						</p>
+					</div>
+					<div>
+						<h1 class="font-semibold text-xl">Revenue</h1>
+						<p class="font-normal">
+							{data.data.revenue
+								? `$${data.data.revenue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+								: '-'}
+						</p>
+					</div>
 				</div>
 			</div>
 			<!-- Other details -->

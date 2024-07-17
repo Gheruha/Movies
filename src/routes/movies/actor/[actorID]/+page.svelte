@@ -1,9 +1,11 @@
 <script>
+	import { onMount } from 'svelte';
 	import Recommendations from '$lib/recommendations.svelte';
 	import { temporary_url } from '$lib/store';
 	import { fade } from 'svelte/transition';
 	export let data;
 
+	let innerWidth = window.innerWidth;
 	let gender = '';
 	let show_more = false;
 	const whatGender = (/** @type {number} */ nr) => {
@@ -23,7 +25,18 @@
 		}
 		return text;
 	}
+
+	onMount(() => {
+		function onResize() {
+			innerWidth = window.innerWidth;
+		}
+
+		window.addEventListener('resize', onResize);
+		return () => window.removeEventListener('resize', onResize);
+	});
 </script>
+
+<!-- <svelte:window bind:innerWidth /> -->
 
 <!-- Navigation -->
 <div class="pt-8 nav flex pl-6 absolute">
@@ -48,44 +61,56 @@
 		>
 	</div>
 {/if}
-<div class="w-full h-full flex space-x-8 p-20 {show_more ? 'filter blur' : ''}">
+
+<!-- Info Div -->
+<div
+	class="w-full h-full flex {show_more ? 'filter blur' : ''} {innerWidth < 1200
+		? 'flex-col justify-center items-center p-4 space-y-20'
+		: ' p-3  space-x-8'}"
+>
 	<!-- Profile Picture-->
 	<div
-		class="border w-2/5 bg-zinc-950 p-8 border-zinc-800 rounded-lg bg-gradient-to-r from-zinc-900 to-black"
+		class="border w-2/5 bg-zinc-950 p-8 border-zinc-800 rounded-lg bg-gradient-to-r from-zinc-900 to-black {innerWidth <
+		1200
+			? 'flex-col w-full'
+			: ''}"
 	>
 		<img
 			src={`https://image.tmdb.org/t/p/w500${data.data.profile_path}`}
 			alt=""
 			class="poster rounded-lg z-50"
 		/>
+
 		<div class="relative w-full max-w-lg z-0 opacity-20">
 			<div class="blob animate-blob animation-delay-4000 bg-blue-700 w-96 h-96 -right-5"></div>
 			<div class="blob animate-blob bg-blue-800 w-96 h-96 -bottom-80 -left-30"></div>
 		</div>
 
 		<!-- Personal Info-->
-		<h1 class="pt-4 text-2xl font-semibold">Personal Info</h1>
-		<h1 class="pt-4 text-lg font-semibold">Known For</h1>
-		<p class="font-normal">{data.data.known_for_department}</p>
+		<div>
+			<h1 class="pt-4 text-2xl font-semibold">Personal Info</h1>
+			<h1 class="pt-4 text-lg font-semibold">Known For</h1>
+			<p class="font-normal">{data.data.known_for_department}</p>
 
-		<h1 class="pt-4 text-lg font-semibold">Gender</h1>
-		<p class="font-normal">{whatGender(data.data.gender)}</p>
+			<h1 class="pt-4 text-lg font-semibold">Gender</h1>
+			<p class="font-normal">{whatGender(data.data.gender)}</p>
 
-		<h1 class="pt-4 text-lg font-semibold">Birthday</h1>
-		<p class="font-normal">{data.data.birthday}</p>
+			<h1 class="pt-4 text-lg font-semibold">Birthday</h1>
+			<p class="font-normal">{data.data.birthday}</p>
 
-		<h1 class="pt-4 text-lg font-semibold">Place of Birth</h1>
-		<p class="font-normal">{data.data.place_of_birth}</p>
+			<h1 class="pt-4 text-lg font-semibold">Place of Birth</h1>
+			<p class="font-normal">{data.data.place_of_birth}</p>
+		</div>
 	</div>
 	<!-- Profile Picture-->
 
 	<!-- Details -->
-	<div class="z-40 w-3/4 space-y-10">
+	<div class="z-40 {innerWidth < 1200 ? 'w-full space-y-20' : 'w-3/4 space-y-10'}">
 		<!-- Name & Biography-->
 		<div
 			class="border w-full bg-zinc-950 p-8 border-zinc-800 rounded-lg bg-gradient-to-r from-black to-zinc-900"
 		>
-			<h1 class="text-6xl font-semibold">{data.data.name}</h1>
+			<h1 class="title">{data.data.name}</h1>
 			{#if data.data.biography != ''}
 				<h1 class="pt-4 text-2xl font-semibold">Biography</h1>
 				<p class="pt-2 text-md font-medium">{truncateText(data.data.biography, 1000)}</p>

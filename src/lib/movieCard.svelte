@@ -19,6 +19,8 @@
 </script>
 
 <div class="w-full">
+	<!-- Genre Filter -->
+	<div class="w-full flex pb-12"></div>
 	<!-- Showing the Header Movie-->
 	{#if movies[0] && movies[0].backdrop_path != null}
 		<section class="pb-12 relative flex flex-col">
@@ -37,7 +39,7 @@
 						{movies[0].vote_average.toFixed(1)}
 					</p>
 				</div>
-				<p class="font-normal pb-12">{truncateText(movies[0].overview, 192)}</p>
+				<p class="font-normal pb-12">{truncateText(movies[0].overview, 102)}</p>
 
 				<!-- Action Buttons -->
 				<div class="flex space-x-4">
@@ -75,7 +77,7 @@
 								alt=""
 								class="rounded-lg poster"
 							/>
-							<h1 class="text-lg font-medium">{movie.original_title}</h1>
+							<h1 class="text-lg font-medium">{truncateText(movie.original_title, 20)}</h1>
 							<p class="text-sm">{movie.release_date}</p>
 						</a>
 					</div>

@@ -99,6 +99,26 @@ h1 {
 	@apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-70;
 }
 
+.details {
+	@apply flex flex-col pl-10;
+}
+
+.other-details {
+	@apply w-full flex z-50;
+}
+
+.actors-div {
+	@apply z-50 flex w-3/4;
+}
+
+.basic-info {
+	@apply z-50 space-y-8 pl-10;
+}
+
+.show_more-div {
+	@apply border w-2/4 bg-zinc-950 p-8 border-zinc-800 rounded-lg overflow-y-auto;
+}
+
 @media (max-width: 1200px) {
 	.movie-card {
 		width: 20%;
@@ -133,8 +153,12 @@ h1 {
 	}
 
 	.iframe-video {
-		width: 560px;
-		height: 340px;
+		width: 980px;
+		height: 600px;
+	}
+
+	.show_more-div {
+		@apply w-3/4;
 	}
 }
 
@@ -163,6 +187,34 @@ h1 {
 
 	.title {
 		@apply text-4xl;
+	}
+
+	.details {
+		@apply flex flex-col pl-10;
+	}
+
+	.other-details {
+		@apply flex-col w-full items-center space-y-10;
+	}
+
+	.actors-div {
+		@apply w-full;
+	}
+
+	.basic-info {
+		@apply text-left items-start border p-6 rounded-lg border-zinc-900 bg-zinc-950 opacity-80;
+	}
+
+	.recommendation-card {
+		width: 125px;
+	}
+
+	.details {
+		@apply pl-2;
+	}
+
+	.show_more-div {
+		width: 90%;
 	}
 }
 

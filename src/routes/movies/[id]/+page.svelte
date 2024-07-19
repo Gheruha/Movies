@@ -203,7 +203,7 @@
 					</div>
 					<div>
 						<h1 class="font-semibold text-xl">Original Language</h1>
-						<p class="font-normal">{data.data.spoken_languages[0].english_name}</p>
+						<!-- <p class="font-normal">{data.data.spoken_languages[0].english_name}</p> -->
 					</div>
 					<div>
 						<h1 class="font-semibold text-xl">Budget</h1>
